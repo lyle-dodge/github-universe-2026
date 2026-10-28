@@ -63,6 +63,7 @@ class SessionTests(unittest.TestCase):
         for url in (
             "http://githubuniverse.com/sessions/example",
             "https://githubuniverse.com.example.org/session",
+            "https://reg.githubuniverse.com.example.org/session",
             "https://example.org/session",
             "https://user@githubuniverse.com/session",
             "https://githubuniverse.com:8443/session",
@@ -71,6 +72,8 @@ class SessionTests(unittest.TestCase):
             with self.subTest(url=url), self.assertRaises(ValueError):
                 validate_url(url)
         self.assertEqual(validate_url(URL), URL)
+        registration_url = "https://reg.githubuniverse.com/flow/github/universe26/session"
+        self.assertEqual(validate_url(registration_url), registration_url)
 
     def test_rejects_offsite_redirect(self):
         with self.assertRaises(ValueError):

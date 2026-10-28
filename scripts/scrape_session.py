@@ -15,12 +15,14 @@ def validate_url(url):
     parts = urlsplit(url)
     if (
         parts.scheme != "https"
-        or parts.hostname not in {"githubuniverse.com", "www.githubuniverse.com"}
+        or parts.hostname not in {
+            "githubuniverse.com", "www.githubuniverse.com", "reg.githubuniverse.com"
+        }
         or parts.username is not None
         or parts.password is not None
         or parts.port not in {None, 443}
     ):
-        raise ValueError("Use an HTTPS session URL on githubuniverse.com.")
+        raise ValueError("Use an HTTPS session URL on an official Universe host.")
     return url
 
 
@@ -122,7 +124,7 @@ def session_markdown(html, url):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("url", help="Individual HTTPS session URL on githubuniverse.com")
+    parser.add_argument("url", help="Individual HTTPS session URL on an official Universe host")
     args = parser.parse_args()
     try:
         url = validate_url(args.url)
