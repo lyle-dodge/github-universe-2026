@@ -1,0 +1,91 @@
+# GitHub Universe 2026 collection
+
+A starting point for collecting GitHub Universe 2026 sessions and useful links.
+Prefer primary sources, keep summaries short, and distinguish announced features
+from generally available tools.
+
+**October 28–29, 2026 · San Francisco, California.**
+Dates, location, and catalog links are confirmed by the
+[GitHub Events announcement](https://github.com/githubevents/universe-sweepstake-2026#readme).
+
+## Sessions and recordings
+
+- [Official Universe site](https://githubuniverse.com/): find the 2026 schedule
+  and individual session pages here when available.
+- [Official 2026 session catalog](https://reg.githubuniverse.com/flow/github/universe26/attendee-portal/page/sessioncatalog).
+- [Official 2026 speaker directory](https://reg.githubuniverse.com/flow/github/universe26/attendee-portal/page/speakers).
+- [GitHub on YouTube](https://www.youtube.com/@GitHub): look for official
+  Universe 2026 recordings when published.
+
+**Collection status:** No individual 2026 sessions or recordings have been
+verified yet. The official sites could not be reached from the initial collection
+environment. This is not a claim that the schedule or recordings are unavailable.
+Do not substitute sessions or videos from previous years.
+
+Add one entry per session below. Include its official session link, scraped title
+and description, speakers and schedule when supplied by the page, and eventually
+the direct GitHub YouTube recording link. Until verified, label the recording
+**Pending verification** rather than guessing a video URL.
+
+### Session entries
+
+No verified entries yet. Use the command below to start an entry from an official
+session page; review its output before adding it here.
+
+## Curated tools, blogs, and announcements
+
+These are official discovery links, **not verified Universe 2026 announcements**.
+Move specific announcements into the table as they are verified.
+
+### Sources to follow
+
+- [GitHub Blog](https://github.blog/): announcements and deeper explanations.
+- [GitHub Changelog](https://github.blog/changelog/): release details, preview
+  availability, and rollout updates.
+- [GitHub Copilot](https://github.com/features/copilot): product information.
+- [GitHub Actions](https://github.com/features/actions): automation tooling.
+- [GitHub Codespaces](https://github.com/features/codespaces): development environments.
+
+### Verified summit links
+
+| Tool, blog, or announcement | Primary source | Why it matters | Availability / caveats |
+| --- | --- | --- | --- |
+| No verified 2026 links yet | — | Add a short, curated explanation, not just a URL | Record preview / GA status where relevant |
+
+## Adding session basics
+
+Requires Python 3.10+ and no third-party packages. From the repository root, pass
+an **individual official session URL**, not the event home page:
+
+```sh
+python3 scripts/scrape_session.py 'https://githubuniverse.com/REPLACE-WITH-SESSION-PATH'
+```
+
+Replace the placeholder with a real URL from the official schedule. The command
+prints Markdown to stdout and does not change this collection. Copy the reviewed
+entry into [Session entries](#session-entries).
+The official `githubuniverse.com`, `www.githubuniverse.com`, and
+`reg.githubuniverse.com` hosts are supported.
+
+The scraper reads JSON-LD event metadata, falling back to Open Graph / HTML title
+and description metadata. Speaker and schedule fields remain **Not provided**
+when absent. It does not execute JavaScript, discover sessions, bypass access
+controls, or search for videos. For client-rendered pages, review the official
+page manually and fill missing fields; do not treat a generic page title as a
+session title.
+
+For each entry:
+
+1. Check that the source is a Universe **2026** session and verify the extracted
+   basics against it. Preserve the published timezone.
+2. Add concise notes or related official tool/blog links if useful.
+3. When available, replace the pending recording with a direct video link from
+   GitHub's YouTube channel, checking that its title and year match the session.
+4. For curated announcements, include a primary source, a short explanation, and
+   availability caveats. Leave uncertain information explicitly unverified.
+
+Run the scraper's focused checks with:
+
+```sh
+python3 -m unittest discover -s tests -v
+```
